@@ -51,6 +51,8 @@ public class TennisGame1 implements ITennisGame {
             case 3:
                 score += "Forty";
                 break;
+            default:
+                score +="";
         }
         return score;
     }
