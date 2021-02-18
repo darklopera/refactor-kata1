@@ -1,6 +1,6 @@
 
 public class TennisGame1 implements ITennisGame {
-    
+
     private int mscore1 = 0;
     private int mscore2 = 0;
     private String player1Name;
@@ -17,27 +17,50 @@ public class TennisGame1 implements ITennisGame {
             mscore2 += 1;
     }
 
+    public String pointDeuce(Integer mscore1) {
+        String score;
+        switch (mscore1) {
+            case 0:
+                score = "Love-All";
+                break;
+            case 1:
+                score = "Fifteen-All";
+                break;
+            case 2:
+                score = "Thirty-All";
+                break;
+            default:
+                score = "Deuce";
+                break;
+        }
+        return score;
+    }
+
+    public String scoreGame(Integer tempScore) {
+        String score = "";
+        switch (tempScore) {
+            case 0:
+                score += "Love";
+                break;
+            case 1:
+                score += "Fifteen";
+                break;
+            case 2:
+                score += "Thirty";
+                break;
+            case 3:
+                score += "Forty";
+                break;
+        }
+        return score;
+    }
+
     public String score() {
         String score = "";
         int tempScore=0;
         if (mscore1 == mscore2)
         {
-            switch (mscore1)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-                
-            }
+            score=pointDeuce(mscore1);
         }
         else if (mscore1 >=4 || mscore2 >=4)
         {
@@ -53,21 +76,7 @@ public class TennisGame1 implements ITennisGame {
             {
                 if (i==1) tempScore = mscore1;
                 else { score+="-"; tempScore = mscore2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
+                 score+= scoreGame(tempScore);
             }
         }
         return score;
