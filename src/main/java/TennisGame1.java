@@ -11,7 +11,6 @@ public class TennisGame1 implements TennisGame {
     private static final HashMap<Integer,String> scores= new HashMap<Integer, String>();
 
 
-
     static {
         scores.put(0, "Love");
         scores.put(1, "Fifteen");
