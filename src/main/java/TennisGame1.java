@@ -42,7 +42,7 @@ public class TennisGame1 implements TennisGame {
         return scores.get(tempScore);
     }
 
-    public String winOrAdvantage(Integer minusResult) {
+    private String winOrAdvantage(Integer minusResult) {
         return Math.abs(minusResult)==1 ? advantage(minusResult): win(minusResult);
     }
 
