@@ -1,5 +1,0 @@
-
-public interface ITennisGame {
-    void wonPoint(String playerName);
-    String score();
-}
