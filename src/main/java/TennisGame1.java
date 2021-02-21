@@ -1,6 +1,5 @@
-import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
+
 
 public class TennisGame1 implements TennisGame {
 
@@ -10,7 +9,7 @@ public class TennisGame1 implements TennisGame {
     private final String player2Name;
 
     private static final HashMap<Integer,String> scores= new HashMap<Integer, String>();
-    private static final HashMap<Integer,String> advantageWin= new HashMap<Integer, String>();
+
 
 
     static {
@@ -39,19 +38,22 @@ public class TennisGame1 implements TennisGame {
         return mscore1 < 3 ? scoreGame(mscore1) + "-All" : "Deuce";
     }
 
-    public String deuceWorks(Integer minusResult) {
-        String score;
-        if (minusResult == 1) score = "Advantage player1";
-        else if (minusResult == -1) score = "Advantage player2";
-        else if (minusResult >= 2) score = "Win for player1";
-        else score = "Win for player2";
-        return score;
-    }
-
-
     private String scoreGame(Integer tempScore) {
         return scores.get(tempScore);
     }
+
+    public String winOrAdvantage(Integer minusResult) {
+        return Math.abs(minusResult)==1 ? advantage(minusResult): win(minusResult);
+    }
+
+    private String advantage(Integer minusResult){
+        return minusResult==1 ? "Advantage " + player1Name : "Advantage " + player2Name;
+    }
+
+    private String win(Integer minusResult){
+        return minusResult>=2 ? "Win for " + player1Name : "Win for " + player2Name;
+    }
+
 
     private boolean isAdvantageOrWin(){
         return mscore1>=4 || mscore2 >= 4 ? Boolean.TRUE: Boolean.FALSE;
@@ -61,9 +63,10 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         if (mscore1 == mscore2) {
             return draw(mscore1);
-        } else if (isAdvantageOrWin()) {
+        }
+        if (isAdvantageOrWin()) {
             int minusResult = mscore1 - mscore2;
-            return deuceWorks(minusResult);
+            return winOrAdvantage(minusResult);
         }
         return scoreGame(mscore1) + "-" + scoreGame(mscore2);
     }
