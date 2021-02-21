@@ -49,23 +49,22 @@ public class TennisGame1 implements TennisGame {
     }
 
 
-    public String scoreGame(Integer tempScore) {
+    private String scoreGame(Integer tempScore) {
         return scores.get(tempScore);
+    }
+
+    private boolean isAdvantageOrWin(){
+        return mscore1>=4 || mscore2 >= 4 ? Boolean.TRUE: Boolean.FALSE;
     }
 
 
     public String getScore() {
-        String score = "";
         if (mscore1 == mscore2) {
-            score = draw(mscore1);
-        } else if (mscore1 >= 4 || mscore2 >= 4) {
+            return draw(mscore1);
+        } else if (isAdvantageOrWin()) {
             int minusResult = mscore1 - mscore2;
-            score = deuceWorks(minusResult);
-        } else {
-            score += scoreGame(mscore1);
-            score += "-";
-            score += scoreGame(mscore2);
+            return deuceWorks(minusResult);
         }
-        return score;
+        return scoreGame(mscore1) + "-" + scoreGame(mscore2);
     }
 }
